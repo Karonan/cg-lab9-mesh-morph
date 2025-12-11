@@ -20,7 +20,6 @@ camera.position.set(30, 20, 25);
 renderer.render(scene, camera);
 const controls = new OrbitControls(camera, renderer.domElement);
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 const directionalLight = new THREE.DirectionalLight();
 scene.add(directionalLight);
 
@@ -77,30 +76,7 @@ const box = new THREE.Mesh(boxGeometry, boxMaterial);
 box.morphTargetInfluences[0] = 1;
 scene.add(box);
 
-// ------------------------ Morphing -------------------------------
-const baseVertex = sphereGeometry.attributes.position;
-const morphAttr = new Float32Array(baseVertex.count * 3);
-
-// for (let i = 0; i < baseVertex.count; i++) {
-//   const ray = new THREE.Raycaster(
-//     new THREE.Vector3(0, 0, 0),
-//     new THREE.Vector3(
-//       baseVertex.array[3 * i],
-//       baseVertex.array[3 * i + 1],
-//       baseVertex.array[3 * i + 2]
-//     ).normalize()
-//   );
-//   const intersects = ray.intersectObject(box);
-//   morphAttr[3 * i] = intersects[0].point.x;
-//   morphAttr[3 * i + 1] = intersects[0].point.y;
-//   morphAttr[3 * i + 2] = intersects[0].point.z;
-// }
-// sphereGeometry.morphAttributes.position = [];
-// sphereGeometry.morphAttributes.position.push(
-//   new THREE.BufferAttribute(morphAttr, 3)
-// );
-
-// sphere.morphTargetInfluences[0] = 1.0;
+// Click to morph
 let isMorphing = false;
 document.addEventListener("click", () => {
   isMorphing = true;
